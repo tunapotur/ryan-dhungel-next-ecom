@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
-import { unique } from "next/dist/build/utils";
 
 const userSchema = new mongoose.Schema(
   {
@@ -31,9 +30,13 @@ const userSchema = new mongoose.Schema(
       data: String,
       expiresAt: {
         type: Date,
-        default: () => new Date(Date.now() + 10 * 60 * 1000), // 10 minutes
+        default: () => new Date(Date.now() + 10 * 60 * 1000), // 10 min
       },
     },
   },
   { timestamps: true }
 );
+
+userSchema.plugin(uniqueValidator, " is already taken.");
+
+export default mongoose.models.User || mongoose.model("User", userSchema);

@@ -12,6 +12,7 @@ const nextConfig = {
   },
   env: {
     DB_URI: config.DB_URI,
+    DB_URI_LOCAL: config.DB_URI_LOCAL,
     API: config.API,
     NEXTAUTH_SECRET: config.NEXTAUTH_SECRET,
     GOOGLE_CLIENT_ID: config.GOOGLE_CLIENT_ID,

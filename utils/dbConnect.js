@@ -4,7 +4,10 @@ const dbConnect = async () => {
   if (mongoose.connection.readyState >= 1) {
     return;
   }
-  mongoose.connect(process.env.MONGODB_URI);
+  // DB_URI_LOCAL for local connection
+  mongoose.connect(process.env.DB_URI_LOCAL, {
+    dbName: "ryan-dhungel-next-ecom",
+  });
 };
 
 export default dbConnect;

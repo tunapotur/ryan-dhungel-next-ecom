@@ -1,13 +1,19 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/user";
 import bcrypt from "bcrypt";
 import dbConnect from "@/utils/dbConnect";
+import { signIn } from "next-auth/react";
 
 export const authOptions = {
   session: {
     strategy: "jwt",
   },
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     CredentialsProvider({
       async authorize(credentials, req) {
         dbConnect();
@@ -27,6 +33,22 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user }) {
+      const { email, name, image } = user;
+      dbConnect();
+
+      let dbUser = await User.findOne({ email });
+      if (!dbUser) {
+        await User.create({
+          email,
+          name,
+          image,
+        });
+      }
+      return true;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",

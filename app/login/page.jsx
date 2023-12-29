@@ -68,6 +68,13 @@ function Login() {
                 {loading ? "Please wait..." : "Submit"}
               </button>
             </form>
+
+            <button
+              className="btn btn-danger btn-raised mb-4"
+              onClick={() => signIn("google", { callbackUrl })}
+            >
+              Sign In with Google
+            </button>
           </div>
         </div>
       </div>

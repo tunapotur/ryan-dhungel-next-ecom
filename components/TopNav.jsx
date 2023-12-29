@@ -5,7 +5,7 @@ import { useSession, signOut } from "next-auth/react";
 
 function TopNav() {
   const { data, status, loading } = useSession();
-  // console.log({ data, status, loading });
+  console.log({ data, status, loading });
 
   return (
     <nav className="nav shadow p-2 justify-content-between mb-3">

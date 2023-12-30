@@ -5,7 +5,7 @@ const dbConnect = async () => {
     return;
   }
   // DB_URI_LOCAL for local connection
-  mongoose.connect(process.env.DB_URI, {
+  mongoose.connect(process.env.DB_URI_LOCAL, {
     dbName: "ryan-dhungel-next-ecom",
   });
 };

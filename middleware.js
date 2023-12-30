@@ -9,7 +9,7 @@ export const config = {
 export default withAuth(
   async function middleware(req) {
     const url = req.nextUrl.pathname;
-    const userRole = req?.nextAuth?.token?.user?.role;
+    const userRole = req?.nextauth?.token?.user?.role;
 
     if (url?.includes("/admin") && userRole !== "admin") {
       return NextResponse.redirect(new URL("/", req.url));

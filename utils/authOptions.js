@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import User from "@/models/user";
 import bcrypt from "bcrypt";
 import dbConnect from "@/utils/dbConnect";
-import { signIn } from "next-auth/react";
 
 export const authOptions = {
   session: {

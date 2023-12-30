@@ -14,9 +14,14 @@ function TopNav() {
       </Link>
 
       {status === "authenticated" ? (
-        <>
-          <Link href="/dashboard/user" className="nav-link">
-            {data?.user?.name}
+        <div className="d-flex justify-content-end">
+          <Link
+            href={`/dashboard/${
+              data?.user?.role === "admin" ? "admin" : "user"
+            }`}
+            className="nav-link"
+          >
+            {data?.user?.name} ({data?.user?.role})
           </Link>
           <a
             className="nav-link pointer"
@@ -24,7 +29,7 @@ function TopNav() {
           >
             Logout
           </a>
-        </>
+        </div>
       ) : status === "loading" ? (
         <a className="nav-link text-danger">Loading...</a>
       ) : (

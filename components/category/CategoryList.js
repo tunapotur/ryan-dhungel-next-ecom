@@ -7,12 +7,16 @@ export default function CategoryList() {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
 
   return (
     <div className="my-5">
       {categories?.map((c) => (
-        <button className="btn" onClick={() => setUpdatingCategory(c)}>
+        <button
+          className="btn"
+          key={c.slug}
+          onClick={() => setUpdatingCategory(c)}
+        >
           {c.name}
         </button>
       ))}

@@ -12,6 +12,7 @@ export async function POST(req) {
     const category = await Category.create({ name, slug: slugify(name) });
     return NextResponse.json(category);
   } catch (err) {
+    console.log(err);
     return NextResponse.json(err.message, { status: 500 });
   }
 }

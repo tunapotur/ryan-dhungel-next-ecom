@@ -12,7 +12,24 @@ export const TagProvider = ({children}) => {
 
     const createTag = async () => {
         try {
-            //
+            const response = await fetch(`${process.env.API}/admin/tag`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({name, parent: parentCategory})
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                toast.error(data);
+            } else {
+                toast.success("Tag created");
+                setName("");
+                setParentCategory("");
+                setTags({data, ...tags});
+            }
         } catch (err) {
             console.log(err);
             toast.error("Error creating tag");
@@ -66,4 +83,4 @@ export const TagProvider = ({children}) => {
     )
 }
 
-export  const useTag = ()=>useContext(TagContext);
+export const useTag = () => useContext(TagContext);
